@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>404 — HELLBOY x COLDBET</title>
+  </head>
+  <body>
+    <div class="app">
+      <div class="arctic-bg" aria-hidden="true">
+        <div class="aurora aurora-1"></div>
+        <div class="aurora aurora-2"></div>
+        <div class="aurora aurora-3"></div>
+      </div>
+
+      <nav class="nav">
+        <div class="nav-inner">
+          <a href="index.html" class="nav-brand">
+            <img src="assets/coldbet-logo.png" alt="COLDBET" class="nav-logo" />
+          </a>
+        </div>
+      </nav>
+
+      <div style="min-height: 70vh; display: flex; align-items: center; justify-content: center; padding: 0 1.25rem;">
+        <div style="text-align: center; max-width: 520px;">
+          <div style="font-size: 5rem; font-weight: 900; line-height: 1; color: var(--accent);">404</div>
+          <h2 style="font-size: clamp(1.65rem, 3.2vw, 2.35rem); font-weight: 900; margin-top: 0.5rem; color: var(--text-primary);">
+            Strona nie została znaleziona
+          </h2>
+          <p style="margin: 0.75rem auto 1.5rem; color: var(--text-secondary);">
+            Przepraszamy, ale strona której szukasz nie istnieje.
+          </p>
+          <a href="index.html" class="btn btn-primary btn-lg">← Powrót do strony głównej</a>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <img src="assets/coldbet-logo.png" alt="COLDBET" class="footer-logo" />
+            <p>Piekielnie Dobre Kasyno</p>
+          </div>
+          <div class="footer-legal">
+            <p>18+ | Graj odpowiedzialnie | Licencjonowane kasyno</p>
+            <p>© <span id="footer-year"></span> HELLBOY x COLDBET. Wszelkie prawa zastrzeżone.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

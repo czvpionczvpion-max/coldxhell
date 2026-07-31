@@ -1,0 +1,1388 @@
+/* ============================================================
+   COLDBET — Arctic Casino Theme
+   ============================================================ */
+
+:root {
+  --bg-primary: #0a0f1a;
+  --bg-secondary: #111927;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.08);
+
+  --text-primary: #f0f7ff;
+  --text-secondary: #94a9c9;
+  --text-muted: #5a7a9a;
+
+  --accent: #4fc3ff;
+  --accent-dark: #1a7ab5;
+  --accent-glow: rgba(79, 195, 255, 0.3);
+
+  --gradient-main: linear-gradient(135deg, #4fc3ff, #1a7ab5);
+  --gradient-card: linear-gradient(145deg, rgba(79, 195, 255, 0.05), rgba(26, 122, 181, 0.02));
+
+  --radius: 20px;
+  --radius-sm: 12px;
+  --radius-lg: 30px;
+
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px rgba(79, 195, 255, 0.15);
+
+  --font: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+/* Reset & Base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--accent); color: #fff; }
+
+/* ============================================================
+   ARCTIC BACKGROUND
+   ============================================================ */
+
+.arctic-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aurora {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.25;
+  animation: auroraDrift 20s ease-in-out infinite alternate;
+}
+.aurora-1 {
+  width: 50vw;
+  height: 40vw;
+  top: -10%;
+  left: -20%;
+  background: radial-gradient(circle, #4fc3ff, transparent 70%);
+}
+.aurora-2 {
+  width: 40vw;
+  height: 30vw;
+  bottom: -5%;
+  right: -10%;
+  background: radial-gradient(circle, #7c4dff, transparent 70%);
+  animation-delay: 5s;
+}
+.aurora-3 {
+  width: 30vw;
+  height: 25vw;
+  top: 40%;
+  left: 50%;
+  background: radial-gradient(circle, #00e5ff, transparent 70%);
+  animation-delay: 10s;
+}
+
+@keyframes auroraDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(5%, 5%) scale(1.1); }
+}
+
+.snow-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  animation: snowFall 12s linear infinite;
+}
+.p1 { left: 10%; animation-delay: 0s; }
+.p2 { left: 25%; animation-delay: 2s; animation-duration: 14s; }
+.p3 { left: 45%; animation-delay: 4s; }
+.p4 { left: 60%; animation-delay: 1s; animation-duration: 10s; }
+.p5 { left: 75%; animation-delay: 3s; }
+.p6 { left: 85%; animation-delay: 5s; animation-duration: 13s; }
+.p7 { left: 15%; animation-delay: 6s; }
+.p8 { left: 50%; animation-delay: 7s; animation-duration: 11s; }
+
+@keyframes snowFall {
+  0% { opacity: 0; transform: translateY(-10vh) scale(1); }
+  10% { opacity: 1; }
+  90% { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(110vh) scale(0.3); }
+}
+
+.flame-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff6b35;
+  box-shadow: 0 0 12px rgba(255, 107, 53, 0.6), 0 0 24px rgba(255, 107, 53, 0.3);
+  opacity: 0;
+  animation: flameRise 6s ease-in infinite;
+}
+.f1 { left: 20%; bottom: 10%; animation-delay: 0s; }
+.f2 { left: 50%; bottom: 5%; animation-delay: 2s; }
+.f3 { left: 80%; bottom: 15%; animation-delay: 4s; }
+
+@keyframes flameRise {
+  0% { opacity: 0; transform: translateY(0) scale(1); }
+  15% { opacity: 0.9; }
+  85% { opacity: 0.4; }
+  100% { opacity: 0; transform: translateY(-80vh) scale(0.2); }
+}
+
+/* ============================================================
+   APP CONTAINER
+   ============================================================ */
+
+.app { position: relative; z-index: 1; }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 15, 26, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(79, 195, 255, 0.08);
+}
+.nav-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0.8rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.nav-logo {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.nav-links a {
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary {
+  background: var(--gradient-main);
+  color: #fff;
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--accent-glow);
+}
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+.btn-sm { padding: 0.4rem 1rem; font-size: 0.8rem; }
+.btn-lg { padding: 0.9rem 2rem; font-size: 1rem; }
+
+/* ============================================================
+   LANG TOGGLE
+   ============================================================ */
+
+.lang-toggle {
+  display: flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.lang-toggle button {
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.lang-toggle button.active {
+  background: var(--gradient-main);
+  color: #fff;
+}
+
+/* ============================================================
+   HERO Z BANNEREM
+   ============================================================ */
+
+.hero-with-banner {
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 1.25rem 4rem;
+  margin-bottom: 0;
+  min-height: 60vh;
+}
+
+.hero-banner-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 1;
+}
+
+.hero-banner-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 15, 26, 0) 0%,
+    rgba(10, 15, 26, 0) 25%,
+    rgba(10, 15, 26, 0.25) 45%,
+    rgba(10, 15, 26, 0.6) 60%,
+    rgba(10, 15, 26, 0.85) 75%,
+    var(--bg-primary) 92%,
+    var(--bg-primary) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-grid-overlay {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  min-height: 50vh;
+}
+
+.hero-visual-empty {
+  display: none;
+}
+
+/* ============================================================
+   HERO CONTENT
+   ============================================================ */
+
+.hero {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 2rem;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.stat { display: flex; flex-direction: column; align-items: center; }
+.stat-number {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================================
+   PRZYCISKI NA DOLE HERO
+   ============================================================ */
+
+.hero-actions-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+/* ============================================================
+   MAIN SECTIONS
+   ============================================================ */
+
+.main { max-width: 1160px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+
+.section {
+  padding: 4rem 0 2rem;
+}
+.section-alt {
+  padding: 3rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.section-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+}
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(79, 195, 255, 0.08);
+  border: 1px solid rgba(79, 195, 255, 0.1);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+.section-tag svg {
+  width: 14px;
+  height: 14px;
+}
+.section-title {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  margin: 0.5rem 0 0.25rem;
+}
+.section-title .highlight {
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section-desc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* ============================================================
+   PROMO GRID
+   ============================================================ */
+
+.promo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+.promo-card-big {
+  grid-column: span 2;
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  border: 1px solid rgba(79, 195, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  transition: 0.3s;
+}
+.promo-card-big:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+  border-color: rgba(79, 195, 255, 0.2);
+}
+.promo-card-big-icon { margin-bottom: 0.5rem; }
+.promo-card-big h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.promo-card-big p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+.promo-card-big .btn-primary {
+  background: linear-gradient(135deg, #ff6b35, #dc2626);
+  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.3);
+}
+
+.promo-card-small {
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  text-align: center;
+  transition: 0.3s;
+}
+.promo-card-small:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+}
+.promo-small-icon { display: block; margin-bottom: 0.5rem; }
+.promo-card-small h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.promo-card-small p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* ============================================================
+   BENEFITS GRID
+   ============================================================ */
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.benefit-card {
+  padding: 1.75rem;
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  text-align: center;
+  transition: 0.3s;
+}
+.benefit-card:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+  border-color: rgba(79, 195, 255, 0.15);
+  box-shadow: var(--shadow-glow);
+}
+.benefit-icon { display: block; margin-bottom: 0.75rem; }
+.benefit-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.benefit-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* ============================================================
+   STEPS GRID
+   ============================================================ */
+
+.steps-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.step-card {
+  flex: 1;
+  min-width: 160px;
+  max-width: 220px;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  text-align: center;
+  transition: 0.3s;
+}
+.step-card:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+}
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gradient-main);
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+.step-content h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.step-content p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.step-arrow {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.steps-cta { text-align: center; margin-top: 1rem; }
+
+/* ============================================================
+   CTA SECTION
+   ============================================================ */
+
+.cta-section {
+  margin: 2rem 0 1rem;
+  padding: 3rem 2rem;
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  border: 1px solid rgba(79, 195, 255, 0.08);
+}
+.cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.cta-content h2 {
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-weight: 800;
+}
+.cta-content p {
+  color: var(--text-secondary);
+  margin: 0.5rem 0 1rem;
+}
+.cta-visual {
+  display: flex;
+  gap: 1rem;
+  opacity: 0.4;
+}
+.cta-visual svg {
+  width: 40px;
+  height: 40px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 2.5rem 1.25rem;
+}
+.footer-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+.footer-logo {
+  height: 35px;
+  width: auto;
+  display: block;
+  margin: 0 auto 0.5rem;
+}
+.footer-brand p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.85rem;
+}
+.footer-links a {
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--accent); }
+.footer-legal p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+  .hero-grid-overlay { grid-template-columns: 1fr; }
+  .hero-stats { justify-content: center; }
+  .hero-actions-bottom { justify-content: center; }
+  .hero-with-banner {
+    padding: 1.5rem 1.25rem 3rem;
+    min-height: 50vh;
+  }
+  .hero-banner-bg { background-position: center 30%; }
+  .hero-banner-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 15, 26, 0) 0%,
+      rgba(10, 15, 26, 0) 20%,
+      rgba(10, 15, 26, 0.3) 40%,
+      rgba(10, 15, 26, 0.6) 55%,
+      rgba(10, 15, 26, 0.85) 75%,
+      var(--bg-primary) 92%,
+      var(--bg-primary) 100%
+    );
+  }
+  .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-actions .btn { font-size: 0.75rem; padding: 0.35rem 0.8rem; }
+  .nav-logo { height: 32px; }
+  
+  .hero-with-banner {
+    padding: 1rem 1.25rem 2.5rem;
+    min-height: 45vh;
+  }
+  .hero-banner-bg {
+    background-size: cover;
+    background-position: center 20%;
+    background-attachment: scroll;
+  }
+  .hero-banner-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 15, 26, 0.1) 0%,
+      rgba(10, 15, 26, 0.35) 30%,
+      rgba(10, 15, 26, 0.6) 50%,
+      rgba(10, 15, 26, 0.85) 70%,
+      var(--bg-primary) 92%,
+      var(--bg-primary) 100%
+    );
+  }
+  .hero-grid-overlay {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    min-height: 40vh;
+    text-align: center;
+  }
+  .hero-content { display: flex; flex-direction: column; align-items: center; }
+  .hero-stats { justify-content: center; flex-wrap: wrap; gap: 1rem; }
+  .hero-actions-bottom { justify-content: center; flex-direction: column; align-items: stretch; }
+  .hero-actions-bottom .btn { width: 100%; justify-content: center; }
+  
+  .promo-grid { grid-template-columns: 1fr; }
+  .promo-card-big { grid-column: span 1; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .steps-grid { flex-direction: column; align-items: stretch; }
+  .step-card { max-width: 100%; }
+  .step-arrow { transform: rotate(90deg); }
+  .cta-inner { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .hero-with-banner {
+    padding: 0.75rem 1rem 2rem;
+    min-height: 40vh;
+  }
+  .hero-banner-bg {
+    background-size: contain;
+    background-position: center 15%;
+    background-repeat: no-repeat;
+    background-color: var(--bg-primary);
+  }
+  .hero-banner-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 15, 26, 0.15) 0%,
+      rgba(10, 15, 26, 0.4) 25%,
+      rgba(10, 15, 26, 0.65) 45%,
+      rgba(10, 15, 26, 0.85) 60%,
+      var(--bg-primary) 85%,
+      var(--bg-primary) 100%
+    );
+  }
+  .hero-grid-overlay { min-height: 35vh; }
+  .hero-stats { gap: 0.75rem; }
+  .stat-number { font-size: 1.2rem; }
+  .stat-label { font-size: 0.6rem; }
+  .stat-divider { height: 30px; }
+  .nav-logo { height: 28px; }
+  .footer-logo { height: 28px; }
+  .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+  .cta-visual svg { width: 30px; height: 30px; }
+}
+
+@media (max-width: 380px) {
+  .hero-with-banner {
+    padding: 0.5rem 0.75rem 1.5rem;
+    min-height: 35vh;
+  }
+  .hero-banner-bg {
+    background-size: contain;
+    background-position: center 10%;
+  }
+  .stat-number { font-size: 1rem; }
+}
+
+@media (min-width: 1600px) {
+  .hero-banner-bg {
+    background-size: contain;
+    background-position: center center;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 768px) {
+  .hero-banner-bg {
+    background-size: contain;
+    background-position: center top;
+    background-color: var(--bg-primary);
+  }
+  .hero-banner-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 15, 26, 0.2) 0%,
+      rgba(10, 15, 26, 0.5) 35%,
+      rgba(10, 15, 26, 0.8) 55%,
+      var(--bg-primary) 85%,
+      var(--bg-primary) 100%
+    );
+  }
+}
+/* ============================================================
+   HERO Z BANNEREM - CZYSTY BANNER
+   ============================================================ */
+
+.hero-with-banner {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  margin-bottom: 0;
+  min-height: 40vh;
+  max-height: 70vh;
+}
+
+.hero-banner-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 1;
+}
+
+.hero-grid-overlay {
+  position: relative;
+  z-index: 1;
+  min-height: 40vh;
+  max-height: 70vh;
+}
+
+.hero-visual-empty {
+  display: none;
+}
+
+/* ============================================================
+   STATYSTYKI POD BANNEREM
+   ============================================================ */
+
+.hero-stats-section {
+  background: var(--bg-primary);
+  padding: 2rem 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.hero-stats-container {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.stat-number svg {
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.hero-actions-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  padding-top: 1.5rem;
+}
+
+.hero-actions-bottom .btn {
+  min-width: 200px;
+}
+
+/* ============================================================
+   RESPONSYWNOŚĆ
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .hero-with-banner {
+    min-height: 25vh;
+    max-height: 40vh;
+  }
+  
+  .hero-grid-overlay {
+    min-height: 25vh;
+    max-height: 40vh;
+  }
+  
+  .hero-stats {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .stat-number {
+    font-size: 1.4rem;
+  }
+  
+  .stat-divider {
+    height: 35px;
+  }
+  
+  .hero-actions-bottom {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-actions-bottom .btn {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-with-banner {
+    min-height: 20vh;
+    max-height: 35vh;
+  }
+  
+  .hero-grid-overlay {
+    min-height: 20vh;
+    max-height: 35vh;
+  }
+  
+  .hero-stats {
+    gap: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 1.1rem;
+  }
+  
+  .stat-label {
+    font-size: 0.6rem;
+  }
+  
+  .stat-divider {
+    height: 28px;
+  }
+  
+  .hero-stats-section {
+    padding: 1.25rem 0.75rem 1rem;
+  }
+  
+  .hero-actions-bottom {
+    padding-top: 1rem;
+  }
+  
+  .hero-actions-bottom .btn {
+    font-size: 0.85rem;
+    padding: 0.7rem 1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-stats {
+    gap: 0.75rem;
+  }
+  
+  .stat-number {
+    font-size: 0.95rem;
+  }
+  
+  .stat-label {
+    font-size: 0.55rem;
+  }
+  
+  .stat-divider {
+    height: 22px;
+  }
+}
+/* ============================================================
+   HERO Z BANNEREM - Z GRADIENTEM OPAZITY
+   ============================================================ */
+
+.hero-with-banner {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  margin-bottom: 0;
+  min-height: 40vh;
+  max-height: 70vh;
+}
+
+.hero-banner-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 1;
+}
+
+/* GRADIENT ŚCIEMNIAJĄCY BANNER OD DOŁU */
+.hero-banner-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 15, 26, 0) 0%,
+    rgba(10, 15, 26, 0) 40%,
+    rgba(10, 15, 26, 0.2) 55%,
+    rgba(10, 15, 26, 0.5) 70%,
+    rgba(10, 15, 26, 0.8) 85%,
+    var(--bg-primary) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-grid-overlay {
+  position: relative;
+  z-index: 1;
+  min-height: 40vh;
+  max-height: 70vh;
+}
+
+.hero-visual-empty {
+  display: none;
+}
+
+/* ============================================================
+   PRZYCISK ZE STRZAŁKĄ W DÓŁ - ANIMACJA
+   ============================================================ */
+
+.btn-scroll {
+  animation: bounce-down 2s ease-in-out infinite;
+}
+
+@keyframes bounce-down {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.btn-scroll:hover {
+  animation: none;
+  transform: translateY(2px);
+}
+
+/* ============================================================
+   STATYSTYKI POD BANNEREM
+   ============================================================ */
+
+.hero-stats-section {
+  background: var(--bg-primary);
+  padding: 2rem 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.hero-stats-container {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.stat-number svg {
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.hero-actions-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  padding-top: 1.5rem;
+}
+
+.hero-actions-bottom .btn {
+  min-width: 200px;
+}
+
+/* ============================================================
+   RESPONSYWNOŚĆ
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .hero-with-banner {
+    min-height: 25vh;
+    max-height: 40vh;
+  }
+  
+  .hero-grid-overlay {
+    min-height: 25vh;
+    max-height: 40vh;
+  }
+  
+  .hero-banner-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 15, 26, 0) 0%,
+      rgba(10, 15, 26, 0) 25%,
+      rgba(10, 15, 26, 0.3) 45%,
+      rgba(10, 15, 26, 0.6) 60%,
+      rgba(10, 15, 26, 0.85) 80%,
+      var(--bg-primary) 100%
+    );
+  }
+  
+  .hero-stats {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .stat-number {
+    font-size: 1.4rem;
+  }
+  
+  .stat-divider {
+    height: 35px;
+  }
+  
+  .hero-actions-bottom {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-actions-bottom .btn {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-with-banner {
+    min-height: 20vh;
+    max-height: 35vh;
+  }
+  
+  .hero-grid-overlay {
+    min-height: 20vh;
+    max-height: 35vh;
+  }
+  
+  .hero-banner-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 15, 26, 0) 0%,
+      rgba(10, 15, 26, 0.1) 20%,
+      rgba(10, 15, 26, 0.35) 40%,
+      rgba(10, 15, 26, 0.6) 55%,
+      rgba(10, 15, 26, 0.85) 75%,
+      var(--bg-primary) 100%
+    );
+  }
+  
+  .hero-stats {
+    gap: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 1.1rem;
+  }
+  
+  .stat-label {
+    font-size: 0.6rem;
+  }
+  
+  .stat-divider {
+    height: 28px;
+  }
+  
+  .hero-stats-section {
+    padding: 1.25rem 0.75rem 1rem;
+  }
+  
+  .hero-actions-bottom {
+    padding-top: 1rem;
+  }
+  
+  .hero-actions-bottom .btn {
+    font-size: 0.85rem;
+    padding: 0.7rem 1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-stats {
+    gap: 0.75rem;
+  }
+  
+  .stat-number {
+    font-size: 0.95rem;
+  }
+  
+  .stat-label {
+    font-size: 0.55rem;
+  }
+  
+  .stat-divider {
+    height: 22px;
+  }
+}
+/* ============================================================
+   LEWITUJĄCE ELEMENTY KASYNOWE W TLE
+   ============================================================ */
+
+.floating-casino {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.06;
+  pointer-events: none;
+  animation: floatShake 8s ease-in-out infinite;
+  color: #4fc3ff;
+}
+
+.floating-casino svg {
+  width: 60px;
+  height: 60px;
+  display: block;
+  filter: drop-shadow(0 0 20px rgba(79, 195, 255, 0.15));
+}
+
+/* Pozycjonowanie każdego elementu */
+.casino-1 {
+  top: 8%;
+  left: 5%;
+  animation-delay: 0s;
+  opacity: 0.05;
+}
+.casino-2 {
+  top: 15%;
+  right: 8%;
+  animation-delay: 1.2s;
+  opacity: 0.04;
+}
+.casino-3 {
+  top: 45%;
+  left: 2%;
+  animation-delay: 2.5s;
+  opacity: 0.06;
+}
+.casino-4 {
+  top: 40%;
+  right: 3%;
+  animation-delay: 0.8s;
+  opacity: 0.05;
+}
+.casino-5 {
+  bottom: 25%;
+  left: 6%;
+  animation-delay: 3.2s;
+  opacity: 0.04;
+}
+.casino-6 {
+  bottom: 30%;
+  right: 5%;
+  animation-delay: 1.8s;
+  opacity: 0.06;
+}
+.casino-7 {
+  bottom: 8%;
+  left: 15%;
+  animation-delay: 4s;
+  opacity: 0.05;
+}
+.casino-8 {
+  bottom: 10%;
+  right: 12%;
+  animation-delay: 2.2s;
+  opacity: 0.04;
+}
+
+/* Animacja powolnego unoszenia + delikatnego kołysania */
+@keyframes floatShake {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  15% {
+    transform: translateY(-8px) rotate(2deg) scale(1.02);
+  }
+  30% {
+    transform: translateY(-3px) rotate(-1deg) scale(0.98);
+  }
+  45% {
+    transform: translateY(-10px) rotate(3deg) scale(1.03);
+  }
+  60% {
+    transform: translateY(-2px) rotate(-2deg) scale(0.97);
+  }
+  75% {
+    transform: translateY(-6px) rotate(1deg) scale(1.01);
+  }
+  85% {
+    transform: translateY(-4px) rotate(-1deg) scale(0.99);
+  }
+}
+
+/* ============================================================
+   RESPONSYWNOŚĆ - UKRYWAMY NIEKTÓRE ELEMENTY NA TELEFONACH
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .floating-casino svg {
+    width: 40px;
+    height: 40px;
+  }
+  .casino-1 { top: 5%; left: 3%; }
+  .casino-2 { top: 10%; right: 5%; }
+  .casino-3 { display: none; }
+  .casino-4 { display: none; }
+  .casino-5 { bottom: 20%; left: 4%; }
+  .casino-6 { bottom: 25%; right: 4%; }
+  .casino-7 { display: none; }
+  .casino-8 { display: none; }
+}
+
+@media (max-width: 480px) {
+  .floating-casino svg {
+    width: 30px;
+    height: 30px;
+  }
+  .casino-1 { top: 3%; left: 2%; opacity: 0.04; }
+  .casino-2 { top: 8%; right: 3%; opacity: 0.03; }
+  .casino-5 { bottom: 15%; left: 3%; opacity: 0.04; }
+  .casino-6 { bottom: 20%; right: 3%; opacity: 0.03; }
+}
